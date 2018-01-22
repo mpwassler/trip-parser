@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require "minitest/spec"
+require 'minitest/spec'
 require "./src/trip"
 require "./src/driver"
 
@@ -55,14 +55,12 @@ describe Driver do
 		driver = Driver.new('Dan')
 		driver.add_trip Trip.new('07:15', '07:45', 17.3)
 		driver.add_trip Trip.new('06:12', '06:32', 21.8)
-		assert driver.trip_report_str == '39 miles @ 47 mph'
+		assert driver.trip_report_str == 'Dan 39 miles @ 47 mph'
 	end
 
 	it "Will print out 0 miles with no mph if there are no trips added" do
 		driver = Driver.new('Dan')
-		assert driver.trip_report_str == '0 miles'
+		assert driver.trip_report_str == 'Dan 0 miles'
 	end
-
-	
 end
  

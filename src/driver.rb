@@ -2,10 +2,14 @@
 # Drivers will be stored in a hash
 # Each driver will have an array of Trips
 class Driver
-	attr_reader :name, :trips
+	attr_reader :trips
 	def initialize(name)
-	    @name = name
+	    @name = name.downcase
 	    @trips = []
+	end
+
+	def name
+		@name.capitalize
 	end
 
 	def add_trip trip 		
@@ -30,19 +34,15 @@ class Driver
 		total_miles = self.trip_total_miles
 		if total_miles > 0
 			(total_miles / self.trips_total_time).round
-		else 
-			nil
-		end
+		else nil end
 	end
 
 	def trip_report_str
 		total_mph = self.trips_total_mph
 		total_miles = self.trip_total_miles.round
 		if total_mph.nil?
-			"#{total_miles} miles"	
-		else
-			"#{total_miles} miles @ #{total_mph} mph"	
-		end
+			"#{@name.capitalize} #{total_miles} miles"	
+		else "#{@name.capitalize} #{total_miles} miles @ #{total_mph} mph"	end
 	end
 end
 

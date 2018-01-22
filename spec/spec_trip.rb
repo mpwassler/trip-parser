@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require "minitest/spec"
+require 'minitest/spec'
 
 describe Trip do 
 	before do

@@ -2,7 +2,7 @@
 require "./src/trip_calculator"
 
 if ARGV[0].nil? 
-	puts "pleace pass a txt file to read"
+	puts "please pass a txt file to read"
 elsif ARGV[0].split(".")[1] != "txt"
 	puts "File must by of type .txt"		
 else
