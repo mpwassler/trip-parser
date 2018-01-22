@@ -15,7 +15,6 @@ describe TripCalculator do
 	  	assert @trip_calculator.drivers.count == 1
   	end
 
-
   	it "Parses the sample input correctly" do
   		@trip_calculator.read_input_line "Driver Dan", 1
 		@trip_calculator.read_input_line "Driver Alex", 2
@@ -28,8 +27,17 @@ describe TripCalculator do
 
   	it "Will create a new driver if it parses a trip that does not already have a driver" do
 		@trip_calculator.read_input_line "Trip Frank 12:01 13:16 42.0", 1
-		@trip_calculator.read_input_line "Trip Ted 12:01 13:16 42.0", 1
+		@trip_calculator.read_input_line "Trip Ted 12:01 13:16 42.0", 2
 		assert @trip_calculator.drivers.count == 2
+  	end
+
+  	it "Will order the output by miles traveled from greatest to least" do
+  		@trip_calculator.read_input_line "Driver Frank", 1
+  		@trip_calculator.read_input_line "Driver Ted", 2
+  		@trip_calculator.read_input_line "Trip Frank 12:01 13:16 42.0", 3
+		@trip_calculator.read_input_line "Trip Ted 12:01 13:16 52.0", 4
+		drivers_sorted = @trip_calculator.sort_drivers_by_miles
+		assert (drivers_sorted[0][1].trip_total_miles == 52 && drivers_sorted[1][1].trip_total_miles == 42 )
   	end
 
   	it "Will only create one driver for name regardless of lettter case" do
@@ -37,7 +45,6 @@ describe TripCalculator do
 		@trip_calculator.read_input_line "Driver ted", 2
   		assert @trip_calculator.drivers.count == 1
   	end
-
 
   	it "Throws exception if trip arguments not formatted corectly" do
   		assert_raises ArgumentError do 

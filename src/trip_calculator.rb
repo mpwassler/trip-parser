@@ -22,16 +22,21 @@ class TripCalculator
 		ensure file.close if file end
 	end
 
+	# sorts from most to least miles driven
+	def sort_drivers_by_miles
+		@drivers.sort_by { |key,driver| -driver.trip_total_miles }
+	end
+
 	# Outputs the report from the file will write to file if passed
 	def write_report filename=nil
-		output_string = ''
-		drivers = @drivers.sort_by { |key,driver| -driver.trip_total_miles }
-		drivers.each do |key,driver|
+		output_string = ''		
+		self.sort_drivers_by_miles.each do |key,driver|
 			output_string += "#{driver.trip_report_str} \n"
 		end
 		unless filename.nil?
 			File.write(filename, output_string)
 		end
+		puts output_string
 		output_string
 	end
 
