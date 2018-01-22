@@ -1,9 +1,7 @@
-
 require 'minitest/autorun'
 require "minitest/spec"
 require "./src/trip"
 require "./src/driver"
-
 
 describe Driver do 
 	before do

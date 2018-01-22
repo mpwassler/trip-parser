@@ -1,7 +1,6 @@
 require 'minitest/autorun'
 require "minitest/spec"
 
-
 describe Trip do 
 	before do
     	@trip = Trip.new('07:15', '07:45', 17.3)

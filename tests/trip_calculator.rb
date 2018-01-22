@@ -3,7 +3,6 @@ require "minitest/spec"
 require "./src/driver"
 require "./src/trip"
 
-
 describe TripCalculator do 
 	before do
     	@trip_calculator = TripCalculator.new
@@ -20,6 +19,4 @@ describe TripCalculator do
 			@trip_calculator.handle_driver_command "Driver".split(" ")
 		end	
   	end 
-
-
 end
