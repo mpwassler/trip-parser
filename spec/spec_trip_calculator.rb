@@ -6,56 +6,56 @@ require "./src/trip"
 
 describe TripCalculator do 
 	before do
-    	@trip_calculator = TripCalculator.new
-  	end
-  	
-  	it "Doesnt add the same driver more than once" do
-	  	@trip_calculator.create_driver "Bob"
-	  	@trip_calculator.create_driver "Bob"
-	  	assert @trip_calculator.drivers.count == 1
-  	end
+		@trip_calculator = TripCalculator.new
+	end
+	
+	it "Doesnt add the same driver more than once" do
+		@trip_calculator.create_driver "Bob"
+		@trip_calculator.create_driver "Bob"
+		assert @trip_calculator.drivers.count == 1
+	end
 
-  	it "Parses the sample input correctly" do
-  		@trip_calculator.read_input_line "Driver Dan", 1
+	it "Parses the sample input correctly" do
+		@trip_calculator.read_input_line "Driver Dan", 1
 		@trip_calculator.read_input_line "Driver Alex", 2
 		@trip_calculator.read_input_line "Driver Bob", 3
 		@trip_calculator.read_input_line "Trip Dan 07:15 07:45 17.3", 4
 		@trip_calculator.read_input_line "Trip Dan 06:12 06:32 21.8", 5
 		@trip_calculator.read_input_line "Trip Alex 12:01 13:16 42.0", 6
- 		assert @trip_calculator.write_report == "Alex 42 miles @ 34 mph \nDan 39 miles @ 47 mph \nBob 0 miles \n"
-  	end
+		assert @trip_calculator.write_report == "Alex 42 miles @ 34 mph \nDan 39 miles @ 47 mph \nBob 0 miles \n"
+	end
 
-  	it "Will create a new driver if it parses a trip that does not already have a driver" do
+	it "Will create a new driver if it parses a trip that does not already have a driver" do
 		@trip_calculator.read_input_line "Trip Frank 12:01 13:16 42.0", 1
 		@trip_calculator.read_input_line "Trip Ted 12:01 13:16 42.0", 2
 		assert @trip_calculator.drivers.count == 2
-  	end
+	end
 
-  	it "Will order the output by miles traveled from greatest to least" do
-  		@trip_calculator.read_input_line "Driver Frank", 1
-  		@trip_calculator.read_input_line "Driver Ted", 2
-  		@trip_calculator.read_input_line "Trip Frank 12:01 13:16 42.0", 3
+	it "Will order the output by miles traveled from greatest to least" do
+		@trip_calculator.read_input_line "Driver Frank", 1
+		@trip_calculator.read_input_line "Driver Ted", 2
+		@trip_calculator.read_input_line "Trip Frank 12:01 13:16 42.0", 3
 		@trip_calculator.read_input_line "Trip Ted 12:01 13:16 52.0", 4
 		drivers_sorted = @trip_calculator.sort_drivers_by_miles
 		assert (drivers_sorted[0][1].trip_total_miles == 52 && drivers_sorted[1][1].trip_total_miles == 42 )
-  	end
+	end
 
-  	it "Will only create one driver for name regardless of lettter case" do
-  		@trip_calculator.read_input_line "Driver Ted", 1
+	it "Will only create one driver for name regardless of lettter case" do
+		@trip_calculator.read_input_line "Driver Ted", 1
 		@trip_calculator.read_input_line "Driver ted", 2
-  		assert @trip_calculator.drivers.count == 1
-  	end
+		assert @trip_calculator.drivers.count == 1
+	end
 
-  	it "Throws exception if trip arguments not formatted corectly" do
-  		assert_raises ArgumentError do 
-			 @trip_calculator.handle_trip_command "Trip Dan 07:15".split(" ")
+	it "Throws exception if trip arguments not formatted corectly" do
+		assert_raises ArgumentError do 
+			@trip_calculator.handle_trip_command "Trip Dan 07:15".split(" ")
 		end	
-  	end 
+	end 
 
-  	it "Throws exception if driver arguments not formatted corectly" do
-  		assert_raises ArgumentError do 
+	it "Throws exception if driver arguments not formatted corectly" do
+		assert_raises ArgumentError do 
 			@trip_calculator.handle_driver_command "Driver".split(" ")
 		end	
-  	end 
+	end 
 
 end

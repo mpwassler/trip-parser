@@ -19,7 +19,7 @@ class TripCalculator
 		rescue => err
 		    puts "File not loaded: #{err}"
 		    err
-		ensure file.close if file end
+		ensure file.close
 	end
 
 	# sorts from most to least miles driven
@@ -42,11 +42,9 @@ class TripCalculator
 
 	# Add a new driver to the hash if thye dont exist already
 	def create_driver name
-		unless @drivers.has_key? name
-			driver = Driver.new name
-			@drivers[driver.name] = driver
-			driver
-		end
+		driver = Driver.new name
+		@drivers[driver.name] = driver
+		driver		
 	end
 
 	# Adds a trip to its specified driver, will create a new driver 
@@ -66,7 +64,9 @@ class TripCalculator
 		unless input_params[1].nil?
 			driver_name = input_params[1]
 			self.create_driver driver_name			
-		else raise ArgumentError, "Driver command requires a driver name" end
+		else 
+			raise ArgumentError, "Driver command requires a driver name" 
+		end
 	end
 
 	# Validates input to trip command
@@ -75,7 +75,9 @@ class TripCalculator
 			trip =  Trip.new input_params[2].to_s, input_params[3].to_s, input_params[4].to_f
 			driver_name = input_params[1]			
 			self.create_trip trip, driver_name	
-		else raise ArgumentError, "Trip command requires a driver name, start time, end time, and distance" end
+		else 
+			raise ArgumentError, "Trip command requires a driver name, start time, end time, and distance" 
+		end
 	end
 
 	# Determines which command is being run per line

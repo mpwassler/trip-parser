@@ -30,6 +30,8 @@ class Trip
 			minuets = hours_mins_arr[0].to_i * 60
 			minuets += hours_mins_arr[1].to_i			
 			minuets.to_f / 60
-		else raise ArgumentError, "Timestamp #{timestamp} must be delimited by a colon ':'"	end
+		else 
+			raise ArgumentError, "Timestamp #{timestamp} must be delimited by a colon ':'"	
+		end
 	end
 end

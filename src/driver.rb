@@ -19,22 +19,20 @@ class Driver
 	end
 
 	def trip_total_miles
-		@trips.reduce(0) do |carry, trip|
-			carry += trip.miles
-		end
+		@trips.reduce(0) { |carry, trip| carry += trip.miles}
 	end
 
 	def trips_total_time
-		@trips.reduce(0) do |carry, trip|
-			carry += trip.total_trip_time
-		end
+		@trips.reduce(0) { |carry, trip| carry += trip.total_trip_time}
 	end
 
 	def trips_total_mph
 		total_miles = self.trip_total_miles
 		if total_miles > 0
 			(total_miles / self.trips_total_time).round
-		else nil end
+		else 
+			nil 
+		end
 	end
 
 	def trip_report_str
@@ -42,7 +40,9 @@ class Driver
 		total_miles = self.trip_total_miles.round
 		if total_mph.nil?
 			"#{@name.capitalize} #{total_miles} miles"	
-		else "#{@name.capitalize} #{total_miles} miles @ #{total_mph} mph"	end
+		else 
+			"#{@name.capitalize} #{total_miles} miles @ #{total_mph} mph"	
+		end
 	end
 end
 
