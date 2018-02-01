@@ -19,7 +19,7 @@ class TripCalculator
 		rescue => err
 		    puts "File not loaded: #{err}"
 		    err
-		ensure file.close
+		ensure file.close  if file end
 	end
 
 	# sorts from most to least miles driven
